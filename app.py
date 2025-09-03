@@ -12,6 +12,19 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 st.set_page_config(page_title="PA eNotice Processor", layout="wide")
 st.title("📩 PA eNotice → CSV Exporter")
 
+# --- How to Use section ---
+with st.expander("ℹ️ How to Use", expanded=True):
+    st.markdown("""
+    1. **Open the PA eNotice email in Outlook**.  
+    2. **Copy the entire email body** (starting from *“The following Permit Applications have changed…”*).  
+    3. **Paste it into the text box below**.  
+    4. Click **Process** → wait a few seconds.  
+    5. Click **Download CSV** to save the results.  
+    6. Open the file in Excel → two columns:  
+       - **Mail Data** = email content  
+       - **API** = Permit #, Authorization Type, Status  
+    """)
+
 # --- Input area ---
 email_text = st.text_area("Paste the full PA eNotice email body here:", height=400)
 
