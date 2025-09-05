@@ -67,7 +67,16 @@ if st.button("Process"):
                 auth_type = soup.find("span", id="ContentPlaceHolder2_DetailsView1_lblAuthType")
                 status = soup.find("span", id="ContentPlaceHolder2_DetailsView1_lblStatus")
 
-                permit_number = f"37-{permit_number.text.strip()}" if permit_number else ""
+                if permit_number:
+                    raw_permit = permit_number.text.strip()
+                    # Keep ESG/ESX as is, prefix 37- for others
+                    if raw_permit.startswith(("ESG", "ESX")):
+                        permit_number = raw_permit
+                    else:
+                        permit_number = f"37-{raw_permit}"
+                else:
+                    permit_number = ""
+
                 auth_type = auth_type.text.strip() if auth_type else ""
                 status = status.text.strip() if status else ""
 
